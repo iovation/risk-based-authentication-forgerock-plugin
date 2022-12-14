@@ -98,7 +98,7 @@ install it before you can implement it.
     resides on Github:
     [https://github.com/iovation](https://github.com/iovation "https://github.com/iovation")
 3.  Unzip the download.
-4.  Copy **iovation-rba-forgerock-plugin1.0.1.jar** to the following location 
+4.  Copy **iovation-rba-forgerock-plugin-1.0.2.jar** to the following location 
     on your ForgeRock AM server: 
     `<root>/webapps/openam/WEB-INF/lib`
 
@@ -281,4 +281,4 @@ If errors occur during processing, they will result in error outcomes.
 
 
 
-© Copyright 2020 iovation, Inc.
+© Copyright 2022 iovation, Inc.
