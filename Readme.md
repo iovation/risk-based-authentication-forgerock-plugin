@@ -170,17 +170,18 @@ To add the IDVision with iovation service to your realm:
 
 Let's look at an example authentication tree with integrated IDVision with iovation Device-Based Authentication nodes. Follow this sequence to add ClearKey to your own login page.
 
-![Scheme](./forgerock_dba_decision_tree_small.png)
+![Scheme](./forgerock_dba_decision_tree_small_new.png)
 
 
 | Step | Description |
 |------|-------------|
 |***1***| Include a _Username Collector_ to gather the username from the customer; IDVision with iovation will then use this to locate the corresponding account ID. |
 |***2***|Add the _Device ID BlackBox Collector_ node to your page in order to collect information on the user's device. The *Device ID BlackBox Collector* automatically integrates with iovation web device print services, creating a blackbox that you can then send to iovation device registration. No configuration is required. This is required before using device pairing features.<br /><br />This example includes a choice to enable users to forget previous device registrations. This calls the *Device Pairing Reset* node and returns the user to the login page. For your own flows, you can choose whether to expose this to end-users. You can also reset pairings from the Intelligence Center and a standalone API which is fully documented in the iovation Help Center.|
-|***3***|Confirm that the user has an established account, for example by verifying password.  Once you've verified the account, use the _Device Pairing Check_ node to determine whether the customer's device is already registered to the user's account. This sends the blackbox to iovation, which returns a **True** or **False** result.|
-|***4***|If the device is known, allow the user to log in.|
-|***5***|If not, we send the device through a step-up flow for additional verification. In this example, we use a one-time-password (OTP) sent through email, however you can customize the process as needed. For example, use IDVision with iovation Device-Based Reputation to perform a risk check on the device, or route through other flows that trigger multifactor solutions such as iovation Multifactor Authentication.|
-|***6***|In this example, if the user passes the OTP step, the device is registered with iovation via the *Device Pairing* node before completing the login flow.|
+|***3***|Include _Scripted Decision_ node that calls server-side JavaScript to set the outcome for the node programmatically and determine the path the authentication journey takes. The script can perform actions before setting the outcome.|
+|***4***|Confirm that the user has an established account, for example by verifying password.  Once you've verified the account, use the _Device Pairing Check_ node to determine whether the customer's device is already registered to the user's account. This sends the blackbox to iovation, which returns a **True** or **False** result.|
+|***5***|If the device is known, allow the user to log in.|
+|***6***|If not, we send the device through a step-up flow for additional verification. In this example, we use a one-time-password (OTP) sent through email, however you can customize the process as needed. For example, use IDVision with iovation Device-Based Reputation to perform a risk check on the device, or route through other flows that trigger multifactor solutions such as iovation Multifactor Authentication.|
+|***7***|In this example, if the user passes the OTP step, the device is registered with iovation via the *Device Pairing* node before completing the login flow.|
 
 #### 1. Configuring the Device ID Blackbox Collector Node
 
@@ -200,7 +201,16 @@ and stores it as an encrypted string called a blackbox. It is required.
 4.  Optionally modify your subscriber key, which your iovation Integration Engineer 
     can provide to you.
 
-#### 2. Configuring the Device Pairing Check Node
+#### 2. Configuring the Scipted Decision Node
+Need to add a JavaScript through Scripted Decision node. Here we will see how to add it.
+
+**Steps to add Scripted Decision Node**
+1.  Go to Scripts page and click New Script button.
+2. 	Give name of the script and select the script type as “Decision node script for authentication trees” and click Create button.
+3.  Copy the JavaScript from ![Javascript](./scripted_decision_javascript.txt) and paste it into script box and click save changes.
+4.  Add scripted decision node in your journey inside the Page node. Click the Scripted Decision node and select your newly created script and save your changes.
+
+#### 3. Configuring the Device Pairing Check Node
 
 The *Device Pairing Check* node determines whether the device is
 registered. It is required.
@@ -213,12 +223,12 @@ check API together with the *Registered / Account Device Pair* business rule.
 Add the *Device Pairing Check* node to your authentication tree. Optionally set a custom 
 node name.
 
-#### 3. Configuring the Device Pairing Node
+#### 4. Configuring the Device Pairing Node
 
 The *Device Pairing* node registers the device with the customer's iovation account ID. It is required. 
 To set it up, add it to your authentication tree. Optionally set a custom node name.
 
-#### 4. Using the Device Pairing Reset Node
+#### 5. Using the Device Pairing Reset Node
 
 The optional *Device Pairing Reset* node resets any existing registrations with a given 
 account, effectively forgetting all known devices. To use it, add it wherever necessary 
