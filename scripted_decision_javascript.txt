@@ -1,0 +1,19 @@
+var myScript = [
+'function fireEvent() {',
+  'document.getElementById("ioBB").dispatchEvent(new Event("input", {bubbles:true}));',
+ 'console.log("event fired: " + document.getElementById("ioBB").value);',
+ '}',
+ 'setTimeout(fireEvent, 1000);'
+].join("\n");
+outcome = "true";
+var fr = JavaImporter(
+ org.forgerock.openam.auth.node.api.Action,
+ com.sun.identity.authentication.callbacks.ScriptTextOutputCallback
+);
+if (callbacks.isEmpty()) {
+ logger.message("FireInputEventScript: sending callbacks");
+ action = fr.Action.send(
+     new fr.ScriptTextOutputCallback(myScript)).build()
+} else {
+ outcome = "true";
+}
