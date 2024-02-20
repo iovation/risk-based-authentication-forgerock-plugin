@@ -136,8 +136,8 @@ implementation:
   - If you will use the Risk Check node, the name of the rule set
     that you will send transactions to
   - URLs to the iovation services. Set this to one of the following:
-      - Customer Integration (CI) environment as you are testing integration: `https://ci-api.iovation.com/`
-      - Production, when you are ready to take your integration live: `https://api.iovation.com`
+      - Customer Integration (CI) environment as you are testing integration: `https://mtls-ci-api.iovation.com/`
+      - Production, when you are ready to take your integration live: `https://mtls-api.iovation.com`
 
 ## Adding the Risk-Based Authentication Plugin to Your ForgeRock Realm
 
