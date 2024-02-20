@@ -153,14 +153,15 @@ To add the IDVision with iovation service to your realm:
 3.  Click **Add a Service**.
 4.  When prompted to choose a service type, select **IDVision with iovation Service
     Configuration** and then select **Create**.
-    ![Scheme](./IDV_iovation_services.png)
+    ![Scheme](./IDV_iovation_mtls_services.png)
 5.  In the **SERVICE** screen that appears, enter the following:
     1. Your iovation subscriber ID
     2. Your iovation account name and password
     3. The root iovation API URL. Set this to one of the following:
-         - Customer Integration (CI) environment as you are testing integration: `https://ci-api.iovation.com/`
-         - Production, when you are ready to take your integration live: `https://api.iovation.com`
-      4. Click **Save Changes**.
+         - Customer Integration (CI) environment as you are testing integration: `https://mtls-ci-api.iovation.com/`
+         - Production, when you are ready to take your integration live: `https://mtls-api.iovation.com`
+      4. Your private key and certificate. These two fields are mandatory if you give mtls service URL.
+      5. Click **Save Changes**.
 
 ## Setting Up Your Authentication Tree
 
